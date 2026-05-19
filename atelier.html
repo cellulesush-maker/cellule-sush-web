@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>L'Atelier — Cellule Sush</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#F5F0E0;--cream-d:#EDE7CE;--cream-dd:#E2DAC0;
+  --teal:#1E8A78;--teal-d:#16705F;--teal-dk:#0F4F45;
+  --lavender:#8B9DC3;--lav-l:#B8C4DC;
+  --ink:#1a2e2a;--muted:#4a6b63;--off:#faf7ef;
+}
+html,body{background:var(--off);color:var(--ink);font-family:'Nunito Sans',sans-serif;font-weight:300;}
+
+header{background:var(--teal-dk);padding:1.4rem 3rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.35rem;color:var(--cream);text-decoration:none;display:flex;align-items:center;gap:0;}
+.baguettes{display:inline-flex;gap:3px;margin:0 1px;align-items:center;}
+.baguettes span{display:block;width:4px;height:15px;background:var(--lavender);border-radius:2px;}
+.logo-sub{font-size:0.7rem;font-weight:300;color:var(--lav-l);margin-left:0.6rem;letter-spacing:0.08em;}
+nav a{font-family:'Nunito',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(245,240,224,0.5);text-decoration:none;transition:color .2s;}
+nav a:hover{color:var(--cream);}
+nav a::before{content:'← ';}
+
+/* Hero */
+.hero{background:var(--teal-dk);padding:2rem 3rem 4rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,0.03);}
+.hero::after{content:'';position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);width:120%;height:80px;background:var(--off);border-radius:50% 50% 0 0;}
+.hero-inner{max-width:680px;position:relative;z-index:1;}
+.hero-tag{font-family:'Nunito',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--lavender);margin-bottom:0.75rem;}
+.hero h1{font-family:'Nunito',sans-serif;font-weight:800;font-size:clamp(2rem,5vw,3rem);color:var(--cream);line-height:1.1;margin-bottom:0.75rem;}
+.hero h1 span{color:var(--lav-l);}
+.hero-desc{font-size:0.86rem;color:rgba(245,240,224,0.62);line-height:1.8;max-width:520px;margin-bottom:1.5rem;}
+.hero-cta{display:inline-flex;align-items:center;gap:0.5rem;background:var(--teal);border:none;border-radius:100px;padding:0.65rem 1.5rem;font-family:'Nunito',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--cream);text-decoration:none;transition:background .25s;}
+.hero-cta:hover{background:var(--teal-d);}
+
+/* Wrapper */
+.wrap{max-width:960px;margin:0 auto;padding:3rem 2rem;}
+
+/* Offres */
+.section-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;color:var(--ink);margin-bottom:1rem;text-align:center;letter-spacing:0.02em;}
+.offres-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem;}
+.offre-card{background:#fff;border:1px solid var(--cream-dd);border-radius:14px;padding:1.35rem;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;}
+.offre-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(30,138,120,0.09);}
+.offre-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal);}
+.offre-icon{font-size:1.6rem;margin-bottom:0.6rem;display:block;}
+.offre-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.95rem;color:var(--teal);margin-bottom:0.35rem;}
+.offre-desc{font-size:0.71rem;color:var(--muted);line-height:1.65;}
+.offre-detail{font-family:'Nunito',sans-serif;font-size:0.62rem;font-weight:700;color:var(--lavender);margin-top:0.65rem;}
+
+/* Infos clés */
+.infos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.9rem;margin-bottom:2rem;}
+.info-card{background:var(--teal);border-radius:14px;padding:1.2rem 1.4rem;}
+.info-card.light{background:var(--cream-d);}
+.info-icon{font-size:1.4rem;margin-bottom:0.5rem;display:block;}
+.info-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.85rem;color:var(--cream);margin-bottom:0.3rem;}
+.info-card.light .info-title{color:var(--teal);}
+.info-text{font-size:0.72rem;color:rgba(245,240,224,0.7);line-height:1.65;}
+.info-card.light .info-text{color:var(--muted);}
+.info-highlight{font-family:'Nunito',sans-serif;font-weight:800;color:var(--cream);font-size:0.78rem;}
+.info-card.light .info-highlight{color:var(--teal);}
+
+/* CTA commande */
+.commande-block{background:var(--teal-dk);border-radius:16px;padding:1.75rem 2rem;margin-bottom:3rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
+.commande-body{flex:1;}
+.commande-body h2{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.1rem;color:var(--cream);margin-bottom:0.35rem;}
+.commande-body p{font-size:0.76rem;color:rgba(245,240,224,0.6);line-height:1.65;}
+.commande-body a.email{color:var(--lav-l);font-weight:600;text-decoration:none;}
+.commande-btns{display:flex;gap:0.65rem;flex-wrap:wrap;flex-shrink:0;}
+.btn-p{font-family:'Nunito',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;background:var(--teal);border:none;border-radius:100px;padding:0.6rem 1.25rem;color:var(--cream);text-decoration:none;cursor:pointer;transition:background .25s;white-space:nowrap;}
+.btn-p:hover{background:var(--teal-d);}
+.btn-o{font-family:'Nunito',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;background:none;border:1.5px solid rgba(245,240,224,0.3);border-radius:100px;padding:0.6rem 1.25rem;color:rgba(245,240,224,0.7);text-decoration:none;cursor:pointer;transition:all .25s;white-space:nowrap;}
+.btn-o:hover{border-color:var(--cream);color:var(--cream);}
+
+/* Menu section */
+.menu-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.35rem;color:var(--teal);margin-bottom:0.5rem;display:flex;align-items:baseline;gap:0.75rem;}
+.menu-note{font-family:'Nunito Sans',sans-serif;font-size:0.7rem;font-weight:300;color:var(--lavender);font-style:italic;}
+.menu-nav{display:flex;overflow-x:auto;scrollbar-width:none;flex-wrap:wrap;gap:0.45rem;margin-bottom:1.5rem;padding-top:1rem;border-top:2px solid var(--cream-dd);}
+.menu-nav::-webkit-scrollbar{display:none;}
+.tab{font-family:'Nunito',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;color:var(--muted);background:none;border:1px solid var(--cream-dd);border-radius:100px;padding:0.36rem 0.95rem;cursor:pointer;transition:all .22s;white-space:nowrap;}
+.tab:hover{border-color:var(--teal);color:var(--teal);}
+.tab.active{background:var(--teal);border-color:var(--teal);color:var(--cream);}
+
+.msection{display:none;}
+.msection.visible{display:block;}
+
+/* Items */
+.cat-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;color:var(--ink);margin:1.4rem 0 0.55rem;display:flex;align-items:center;}
+.qty-label{font-family:'Nunito',sans-serif;font-size:0.57rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-left:auto;display:flex;gap:1.5rem;}
+.qty-label span{min-width:42px;text-align:right;}
+
+.item{display:flex;align-items:flex-start;gap:0.5rem;padding:0.52rem 0;border-bottom:1px dashed var(--cream-dd);}
+.item:last-child{border-bottom:none;}
+.item-dot{width:5px;height:5px;border-radius:50%;background:var(--lavender);flex-shrink:0;margin-top:5px;}
+.item-body{flex:1;}
+.item-name{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.84rem;color:var(--ink);}
+.item-desc{font-size:0.69rem;color:var(--muted);line-height:1.5;display:block;margin-top:1px;}
+.item-allergen{font-size:0.58rem;color:var(--lavender);letter-spacing:0.06em;display:block;margin-top:2px;}
+.item-right{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;gap:0.15rem;padding-top:1px;}
+.item-price{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.8rem;color:var(--ink);white-space:nowrap;}
+.item-prices{display:flex;gap:1.5rem;}
+.veg{display:inline-block;background:rgba(30,138,120,0.1);color:var(--teal);font-size:0.52rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:1px 5px;border-radius:4px;margin-left:4px;vertical-align:middle;}
+.star{color:var(--teal);font-size:0.8rem;vertical-align:middle;margin-right:2px;}
+
+/* Meltings base */
+.base-block{background:var(--cream-d);border-radius:10px;padding:0.85rem 1.1rem;margin:0.75rem 0;}
+.base-label{font-family:'Nunito',sans-serif;font-size:0.56rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem;}
+.base-text{font-size:0.71rem;color:var(--ink);line-height:1.6;}
+
+/* Boissons & sides grid */
+.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:0.5rem;}
+.col-group h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;color:var(--teal);margin-bottom:0.6rem;padding-bottom:0.35rem;border-bottom:1px solid var(--cream-dd);}
+
+/* Allergenes */
+.allergen-block{background:var(--cream-d);border-radius:12px;padding:1rem 1.25rem;margin-top:2rem;}
+.allergen-title{font-family:'Nunito',sans-serif;font-size:0.65rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;}
+.allergen-grid{display:flex;flex-wrap:wrap;gap:0.4rem 1.25rem;}
+.allergen-item{font-size:0.68rem;color:var(--ink);}
+.allergen-item strong{color:var(--teal);}
+
+.footer-note{text-align:center;font-size:0.67rem;color:var(--muted);margin-top:3rem;padding:1rem 1.25rem;background:var(--cream-d);border-radius:12px;line-height:1.75;}
+
+@media(max-width:640px){
+  header{padding:1rem 1.25rem;}
+  .hero{padding:1.5rem 1.25rem 3rem;}
+  .wrap{padding:2rem 1rem;}
+  .commande-block{flex-direction:column;gap:1rem;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">ce<span class="baguettes"><span></span><span></span></span>ule&nbsp;sush<span class="logo-sub">— L'Atelier</span></a>
+  <nav><a href="/restaurant">Retour au restaurant</a></nav>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-tag">Production &amp; livraison · B2B · Louvain-la-Neuve</p>
+    <h1>Cellule Sush<br/><span>L'Atelier</span></h1>
+    <p class="hero-desc">Notre laboratoire de production livre chaque midi en semaine dans les zonings de Louvain-la-Neuve et de Wavre, alimente plusieurs enseignes partenaires, et prend en charge vos grandes commandes pour événements et plateaux d'entreprise.</p>
+    <a class="hero-cta" href="#commander">Passer commande</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- Offres -->
+  <p class="section-label" style="margin-bottom:1.25rem;">Ce que nous proposons</p>
+  <div class="offres-grid">
+    <div class="offre-card">
+      <span class="offre-icon">🏢</span>
+      <p class="offre-name">Livraison bureau</p>
+      <p class="offre-desc">Commandez avant 10h, livraison entre 12h et 13h30 dans les zonings de LLN et Wavre. Du lundi au vendredi.</p>
+      <p class="offre-detail">Livraison gratuite · Panier min. 75€</p>
+    </div>
+    <div class="offre-card">
+      <span class="offre-icon">🛒</span>
+      <p class="offre-name">Supermarchés</p>
+      <p class="offre-desc">Retrouvez nos spécialités au AD Delhaize de Chastre, au AD Delhaize de Genappe et au Carrefour de Genappe.</p>
+      <p class="offre-detail">Disponible en rayon</p>
+    </div>
+    <div class="offre-card">
+      <span class="offre-icon">🎉</span>
+      <p class="offre-name">Événementiel</p>
+      <p class="offre-desc">Séminaires, cocktails, team buildings et réceptions d'entreprise — nous gérons vos grandes commandes sur mesure.</p>
+      <p class="offre-detail">Sur devis · Contact par mail</p>
+    </div>
+    <div class="offre-card">
+      <span class="offre-icon">📦</span>
+      <p class="offre-name">Grandes commandes</p>
+      <p class="offre-desc">Plateaux, réunions, repas de groupe — préparés en quantité et livrés à l'heure convenue.</p>
+      <p class="offre-detail">Sur devis · Délai à convenir</p>
+    </div>
+  </div>
+
+  <!-- Infos clés -->
+  <div class="infos-grid">
+    <div class="info-card">
+      <span class="info-icon">🕙</span>
+      <p class="info-title">Horaires de commande</p>
+      <p class="info-text">Commande avant <span class="info-highlight">10h00</span> pour une livraison dans la journée.<br/>Livraison entre <span class="info-highlight">12h00 et 13h30</span>, lundi au vendredi.</p>
+    </div>
+    <div class="info-card">
+      <span class="info-icon">🛵</span>
+      <p class="info-title">Livraison gratuite</p>
+      <p class="info-text">Pas de frais de livraison à partir d'un panier minimum de <span class="info-highlight">75€</span>.<br/>Zones : zonings LLN &amp; Wavre.</p>
+    </div>
+    <div class="info-card light">
+      <span class="info-icon">✉️</span>
+      <p class="info-title">Comment commander ?</p>
+      <p class="info-text">Par mail à <span class="info-highlight">atelier.cellulesush@gmail.com</span></p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="commande-block" id="commander">
+    <div class="commande-body">
+      <h2>Prêt à commander ?</h2>
+      <p>Envoyez votre commande avant 10h à <a class="email" href="mailto:atelier.cellulesush@gmail.com">atelier.cellulesush@gmail.com</a><br/>Pour l'événementiel et les grandes commandes, contactez-nous pour un devis personnalisé.</p>
+    </div>
+    <div class="commande-btns">
+      <a class="btn-p" href="mailto:atelier.cellulesush@gmail.com">Commander par mail</a>
+
+    </div>
+  </div>
+
+  <!-- Menu -->
+  <div class="menu-title">Notre carte <span class="menu-note">Livraison gratuite dès 75€ · Commande avant 10h</span></div>
+  <nav class="menu-nav">
+    <button class="tab active" onclick="show('makis',this)">Makis &amp; Californias</button>
+    <button class="tab" onclick="show('tartares',this)">Tartares</button>
+    <button class="tab" onclick="show('meltings',this)">Meltings-Pots</button>
+    <button class="tab" onclick="show('nigiris',this)">Nigiris</button>
+    <button class="tab" onclick="show('sides',this)">Sides &amp; Boissons</button>
+  </nav>
+
+  <!-- MAKIS & CALIFORNIAS -->
+  <div class="msection visible" id="makis">
+    <div class="cat-title">
+      Makis
+      <div class="qty-label"><span>8 pcs</span></div>
+    </div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Salmicondis</span><span class="item-desc">saumon, concombre</span><span class="item-allergen">D</span></div><div class="item-right"><span class="item-price">5,50€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Juriste 2</span><span class="item-desc">saumon, avocat</span><span class="item-allergen">D</span></div><div class="item-right"><span class="item-price">5,90€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name"><span class="star">★</span>Pean-up</span><span class="item-desc">thon cuit aux 7 épices, concombre, cacahuètes, mayo japonaise</span><span class="item-allergen">A C D E F H I</span></div><div class="item-right"><span class="item-price">7,20€</span></div></div>
+
+    <div class="cat-title" style="margin-top:1.75rem;">
+      Californias
+      <div class="qty-label"><span>8 pcs</span></div>
+    </div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Boul'Ciboule</span><span class="item-desc">saumon, philadelphia, ciboulette</span><span class="item-allergen">D G</span></div><div class="item-right"><span class="item-price">7,60€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Dark'Ciboule</span><span class="item-desc">saumon cuit, philadelphia, ciboulette, sauce unagi</span><span class="item-allergen">A D F G I</span></div><div class="item-right"><span class="item-price">7,70€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name"><span class="star">★</span>Samoa</span><span class="item-desc">saumon, mangue, avocat, oignons frits</span><span class="item-allergen">A D</span></div><div class="item-right"><span class="item-price">7,70€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Salmenbon</span><span class="item-desc">sauce unagi, oignons jeunes, nigiris saumon, pommes, roquette, saumon fumé, mousse de saumon</span><span class="item-allergen">A B C D F G I</span></div><div class="item-right"><span class="item-price">7,70€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name"><span class="star">★</span>Chick N'Sush'</span><span class="item-desc">poulet frit, concombre, philadelphia, oignons frits rouges et jeunes, mayo sweet chilli</span><span class="item-allergen">A C G</span></div><div class="item-right"><span class="item-price">7,60€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name"><span class="star">★</span>Spicy Mango</span><span class="item-desc">scampi tempura, mangue, philadelphia, oignons frits, mayo mango</span><span class="item-allergen">A B C D E F G I</span></div><div class="item-right"><span class="item-price">7,70€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Jason</span><span class="item-desc">saumon fumé, philadelphia tartufata, oignons rouges et jeunes, cacahuètes, roquette, parmesan, sauce unagi</span><span class="item-allergen">A B C D E F G H</span></div><div class="item-right"><span class="item-price">8,50€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Chick N'Sush VG <span class="veg">vegan</span></span><span class="item-desc">avocat, concombre, philadelphia, oignons frits rouges et jeunes, mayo sweet chilli</span><span class="item-allergen">A C G</span></div><div class="item-right"><span class="item-price">6,70€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Boul'Ciboule VG <span class="veg">vegan</span></span><span class="item-desc">avocat, philadelphia, ciboulette</span><span class="item-allergen">G</span></div><div class="item-right"><span class="item-price">6,70€</span></div></div>
+  </div>
+
+  <!-- TARTARES -->
+  <div class="msection" id="tartares">
+    <div class="cat-title">Tartares</div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Tartare Saumon</span><span class="item-desc">riz, saumon, avocat, sésame</span><span class="item-allergen">D I</span></div><div class="item-right"><span class="item-price">9,90€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Tartare Thon</span><span class="item-desc">riz, thon, avocat, sésame</span><span class="item-allergen">D I</span></div><div class="item-right"><span class="item-price">10,50€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Tartare Mi-Mi</span><span class="item-desc">riz, thon, saumon, mangue, avocat, oignons frits, ciboulette, sauce maison</span><span class="item-allergen">A B C D F G I</span></div><div class="item-right"><span class="item-price">12,50€</span></div></div>
+  </div>
+
+  <!-- MELTINGS-POTS -->
+  <div class="msection" id="meltings">
+    <div class="base-block" style="margin-top:0.5rem;">
+      <p class="base-label">Base</p>
+      <p class="base-text"><strong>Riz · Avocat · Concombre · 7 épices · Edamame</strong></p>
+      <p class="base-text" style="margin-top:0.2rem;"><strong>Toppings :</strong> oignons jeunes et frits · sésame</p>
+    </div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name"><span class="star">★</span>MP Saumon Cru</span><span class="item-desc">base + carottes, sauce unagi, mayo sriracha, mayo japonaise</span><span class="item-allergen">D F I</span></div><div class="item-right"><span class="item-price">13,90€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">MP Saumon Cuit</span><span class="item-desc">base + carottes, sauce unagi, mayo sriracha, mayo japonaise</span><span class="item-allergen">A C D F I</span></div><div class="item-right"><span class="item-price">13,90€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name"><span class="star">★</span>MP Poulet</span><span class="item-desc">base + tomates cerises, sauce unagi, mayo sweet chilli</span><span class="item-allergen">A D F G</span></div><div class="item-right"><span class="item-price">14,50€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">MP Scampi</span><span class="item-desc">base + mangue, sauce mayo mango</span><span class="item-allergen">A B C D E F I</span></div><div class="item-right"><span class="item-price">14,50€</span></div></div>
+  </div>
+
+  <!-- NIGIRIS -->
+  <div class="msection" id="nigiris">
+    <div class="cat-title">
+      Nigiris
+      <div class="qty-label"><span>4 pcs</span></div>
+    </div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Nigiris Saumon</span><span class="item-desc">riz, saumon, huile de sésame</span><span class="item-allergen">D I</span></div><div class="item-right"><span class="item-price">7,90€</span></div></div>
+  </div>
+
+  <!-- SIDES & BOISSONS -->
+  <div class="msection" id="sides">
+    <div class="two-col">
+      <div class="col-group">
+        <h3>Sides</h3>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Salade d'algues</span><span class="item-allergen">A I</span></div><div class="item-right"><span class="item-price">4,20€</span></div></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Kimchi</span><span class="item-allergen">A E F I</span></div><div class="item-right"><span class="item-price">4,20€</span></div></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Salade chou / carotte</span><span class="item-allergen">A E F L</span></div><div class="item-right"><span class="item-price">3,50€</span></div></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Riz</span></div><div class="item-right"><span class="item-price">3,50€</span></div></div>
+      </div>
+      <div class="col-group">
+        <h3>Boissons</h3>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Coca, Coca Zero, Fanta, IceTea Pêche</span></div><div class="item-right"><span class="item-price">3,00€</span></div></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Eau plate / Eau pétillante</span></div><div class="item-right"><span class="item-price">2,50€</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Allergènes -->
+  <div class="allergen-block">
+    <p class="allergen-title">Allergènes</p>
+    <div class="allergen-grid">
+      <span class="allergen-item"><strong>A</strong> = Gluten</span>
+      <span class="allergen-item"><strong>B</strong> = Crustacés</span>
+      <span class="allergen-item"><strong>C</strong> = Œufs</span>
+      <span class="allergen-item"><strong>D</strong> = Poisson</span>
+      <span class="allergen-item"><strong>E</strong> = Arachides</span>
+      <span class="allergen-item"><strong>F</strong> = Soja</span>
+      <span class="allergen-item"><strong>G</strong> = Lait</span>
+      <span class="allergen-item"><strong>H</strong> = Fruits à coques</span>
+      <span class="allergen-item"><strong>I</strong> = Sésame</span>
+    </div>
+  </div>
+
+  <p class="footer-note">
+    La carte des allergènes complète est disponible sur demande à <a href="mailto:atelier.cellulesush@gmail.com" style="color:var(--teal);font-weight:600;text-decoration:none;">atelier.cellulesush@gmail.com</a><br/>
+    Tous nos plats sont fraîchement préparés. Malgré toutes nos précautions, nous ne pouvons garantir l'absence totale d'allergènes.
+  </p>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.msection').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('visible');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

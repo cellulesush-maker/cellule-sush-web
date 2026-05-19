@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>La Boutique — Cellule Sush</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,600;0,700;0,800;1,300&family=Nunito+Sans:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream:   #F5F0E0; --cream-d: #EDE7CE;
+    --teal:    #1E8A78; --teal-d:  #16705F;
+    --lavender:#8B9DC3; --lav-l:   #B8C4DC;
+    --ink:     #1a2e2a; --muted:   #4a6b63;
+  }
+  html, body { height: 100%; background: var(--cream); color: var(--ink);
+    font-family: 'Nunito Sans', sans-serif; font-weight: 300; }
+  .shell { min-height: 100vh; display: flex; flex-direction: column; }
+
+  header {
+    padding: 1.75rem 3rem; display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1.5px solid var(--cream-d);
+  }
+  .logo { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.35rem;
+    color: var(--teal); text-decoration: none; display: flex; align-items: center; }
+  .baguettes { display: inline-flex; gap: 3px; margin: 0 1px; align-items: center; }
+  .baguettes span { display: block; width: 4px; height: 15px; background: var(--lavender); border-radius: 2px; }
+  .back { font-family: 'Nunito', sans-serif; font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted);
+    text-decoration: none; transition: color 0.25s; }
+  .back:hover { color: var(--teal); }
+
+  /* ── Split layout ── */
+  .content { flex: 1; display: grid; grid-template-columns: 1fr 1fr; }
+
+  .left { display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 4rem 5rem 5rem; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.55rem; width: fit-content;
+    font-family: 'Nunito', sans-serif; font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--teal);
+    background: rgba(30,138,120,0.08); border: 1px solid rgba(30,138,120,0.25);
+    padding: 0.4rem 1rem; border-radius: 100px; margin-bottom: 2rem;
+    animation: fadeUp 0.7s ease both;
+  }
+  .badge-line { width: 18px; height: 1.5px; background: var(--teal); border-radius: 1px; }
+
+  h1 { font-family: 'Nunito', sans-serif; font-weight: 800;
+    font-size: clamp(2.8rem, 4.5vw, 4.5rem); line-height: 1.0; color: var(--teal);
+    margin-bottom: 0.5rem; animation: fadeUp 0.7s 0.1s ease both; }
+
+  .sub-title { font-family: 'Nunito', sans-serif; font-style: italic; font-weight: 300;
+    font-size: 1.1rem; color: var(--muted);
+    margin-bottom: 2.5rem; animation: fadeUp 0.7s 0.15s ease both; }
+
+  .sep { width: 40px; height: 3px; background: var(--lavender); border-radius: 2px;
+    margin-bottom: 2rem; animation: fadeUp 0.7s 0.2s ease both; }
+
+  .message { font-size: 0.8rem; color: var(--muted); line-height: 1.9; letter-spacing: 0.04em;
+    max-width: 360px; margin-bottom: 2.5rem; animation: fadeUp 0.7s 0.28s ease both; }
+
+  .notify { display: flex; max-width: 340px; animation: fadeUp 0.7s 0.38s ease both; }
+  .notify input { flex: 1; background: #fff; border: 1.5px solid var(--cream-d);
+    border-right: none; border-radius: 12px 0 0 12px; color: var(--ink);
+    font-family: 'Nunito Sans', sans-serif; font-size: 0.75rem;
+    padding: 0.82rem 1.1rem; outline: none; transition: border-color 0.3s; }
+  .notify input::placeholder { color: var(--lav-l); }
+  .notify input:focus { border-color: var(--teal); }
+  .notify button { background: var(--teal); border: 1.5px solid var(--teal);
+    border-radius: 0 12px 12px 0; color: var(--cream);
+    font-family: 'Nunito', sans-serif; font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase; padding: 0.82rem 1.1rem;
+    cursor: pointer; transition: background 0.3s; white-space: nowrap; }
+  .notify button:hover { background: var(--teal-d); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem;
+    animation: fadeUp 0.7s 0.48s ease both; }
+  .tag { font-family: 'Nunito', sans-serif; font-size: 0.62rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted);
+    border: 1px solid var(--cream-d); border-radius: 100px; padding: 0.3rem 0.9rem; }
+
+  /* ── Right decorative panel ── */
+  .right { background: var(--teal); display: flex; align-items: center;
+    justify-content: center; position: relative; overflow: hidden; }
+
+  .right::before {
+    content: ''; position: absolute; top: -80px; right: -80px;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .right::after {
+    content: ''; position: absolute; bottom: -60px; left: -60px;
+    width: 220px; height: 220px; border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .deco { position: relative; z-index: 1; text-align: center; }
+  .deco-circle {
+    width: 200px; height: 200px; border-radius: 50%;
+    border: 1.5px solid rgba(245,240,224,0.2);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem; position: relative;
+  }
+  .deco-circle::before {
+    content: ''; position: absolute; inset: 15px; border-radius: 50%;
+    border: 1px dashed rgba(139,157,195,0.35);
+    animation: spin 25s linear infinite;
+  }
+  .deco-inner {
+    width: 100px; height: 100px; border-radius: 50%;
+    background: rgba(245,240,224,0.08);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .deco-inner span { font-family: 'Nunito', sans-serif; font-size: 2.5rem; }
+  .deco-label { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.62rem;
+    letter-spacing: 0.28em; text-transform: uppercase; color: rgba(245,240,224,0.45); }
+
+  .corner { position: absolute; bottom: 1.75rem; right: 2rem;
+    font-family: 'Nunito', sans-serif; font-size: 0.6rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,240,224,0.25); }
+
+  footer { padding: 1.25rem 3rem; text-align: center;
+    font-size: 0.62rem; letter-spacing: 0.15em; color: var(--lav-l);
+    border-top: 1.5px solid var(--cream-d); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 768px) {
+    .content { grid-template-columns: 1fr; }
+    .right { display: none; }
+    .left { padding: 3rem 2rem; }
+    header { padding: 1.25rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <a class="logo" href="/">ce<span class="baguettes"><span></span><span></span></span>ule&nbsp;sush</a>
+    <a class="back" href="/">← Retour</a>
+  </header>
+
+  <div class="content">
+    <div class="left">
+      <div class="badge"><span class="badge-line"></span>En cours de création</div>
+      <h1>La<br/>Boutique</h1>
+      <p class="sub-title">Épicerie fine asiatique</p>
+      <div class="sep"></div>
+      <p class="message">
+        Notre boutique en ligne arrive bientôt.<br/>
+        Produits sélectionnés, épicerie fine,<br/>
+        livraison à domicile sur Bruxelles.
+      </p>
+      <form class="notify" onsubmit="handleSubmit(event)">
+        <input type="email" placeholder="Votre e-mail" required/>
+        <button type="submit">Me notifier</button>
+      </form>
+      <div class="tags">
+        <span class="tag">Épicerie</span>
+        <span class="tag">Sauces</span>
+        <span class="tag">Nouilles</span>
+        <span class="tag">Thés</span>
+        <span class="tag">Ustensiles</span>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="deco">
+        <div class="deco-circle">
+          <div class="deco-inner"><span>🛒</span></div>
+        </div>
+        <p class="deco-label">Bientôt disponible</p>
+      </div>
+      <p class="corner">Boutique asiatique</p>
+    </div>
+  </div>
+
+  <footer>&copy; 2025 Cellule Sush &nbsp;·&nbsp; Bruxelles</footer>
+</div>
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Enregistré ✓';
+    btn.style.background = '#16705F';
+    e.target.querySelector('input').disabled = true;
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>

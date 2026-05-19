@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cellule Sush</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream:   #F5F0E0;
+    --cream-d: #EDE7CE;
+    --teal:    #1E8A78;
+    --teal-d:  #16705F;
+    --lavender:#8B9DC3;
+    --lav-l:   #B8C4DC;
+    --ink:     #1a2e2a;
+    --muted:   #4a6b63;
+  }
+
+  html, body { height: 100%; background: var(--cream); color: var(--ink);
+    font-family: 'Nunito Sans', sans-serif; font-weight: 300; }
+
+  .shell { min-height: 100vh; display: flex; flex-direction: column; }
+
+  header {
+    padding: 1.75rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1.5px solid var(--cream-d);
+  }
+
+  .logo {
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.45rem;
+    color: var(--teal); text-decoration: none; display: flex; align-items: center; gap: 0;
+  }
+  .baguettes { display: inline-flex; gap: 3px; margin: 0 1px; align-items: center; }
+  .baguettes span { display: block; width: 4px; height: 16px; background: var(--lavender); border-radius: 2px; }
+  .logo .sush { color: var(--teal); }
+
+  nav a {
+    font-family: 'Nunito', sans-serif; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    text-decoration: none; transition: color 0.25s;
+  }
+  nav a:hover { color: var(--teal); }
+
+  .hero {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 4rem 2rem 3rem; text-align: center;
+  }
+
+  .eyebrow {
+    font-family: 'Nunito', sans-serif; font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--lavender);
+    margin-bottom: 1.5rem; animation: fadeUp 0.7s ease both;
+  }
+
+  h1 {
+    font-family: 'Nunito', sans-serif; font-weight: 800;
+    font-size: clamp(2.4rem, 5vw, 3.8rem); line-height: 1.1;
+    color: var(--teal); margin-bottom: 0.75rem;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+
+  .sub {
+    font-size: 0.95rem; color: var(--muted); margin-bottom: 1rem;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .sep {
+    width: 44px; height: 3px; background: var(--lavender);
+    border-radius: 2px; margin: 1.5rem auto 3rem;
+    animation: fadeUp 0.7s 0.25s ease both;
+  }
+
+  .cards {
+    display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.35s ease both;
+  }
+
+  .card {
+    width: 295px; border-radius: 20px; overflow: hidden;
+    text-decoration: none; color: inherit;
+    transition: transform 0.35s, box-shadow 0.35s;
+    box-shadow: 0 2px 0 var(--cream-d);
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 18px 44px rgba(30,138,120,0.13); }
+
+  .card-top {
+    background: var(--teal); padding: 2.25rem 2rem 2rem;
+    position: relative; overflow: hidden;
+  }
+  .card-top::after {
+    content: ''; position: absolute; bottom: -28px; right: -28px;
+    width: 110px; height: 110px; border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+  }
+
+  .card-tag {
+    font-family: 'Nunito', sans-serif; font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom: 0.7rem;
+  }
+  .card-num { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 3rem; color: rgba(255,255,255,0.1); line-height: 1; margin-bottom: 0.25rem; }
+  .card-title { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.85rem; color: var(--cream); line-height: 1.1; }
+
+  .card-bottom { padding: 1.5rem 2rem; background: #fff; }
+  .card-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.2rem; }
+  .card-cta {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'Nunito', sans-serif; font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal);
+  }
+  .arrow { transition: transform 0.25s; }
+  .card:hover .arrow { transform: translateX(4px); }
+
+  .card.boutique .card-top { background: var(--cream-d); }
+  .card.boutique .card-tag { color: rgba(30,138,120,0.45); }
+  .card.boutique .card-num { color: rgba(30,138,120,0.08); }
+  .card.boutique .card-title { color: var(--teal); }
+  .card.boutique .card-bottom { background: var(--cream); }
+
+  .horaires {
+    margin-top: 3rem; display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.72rem; color: var(--muted);
+    animation: fadeUp 0.7s 0.5s ease both;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); opacity: 0.5; }
+
+  footer {
+    padding: 1.2rem 3rem; text-align: center;
+    font-size: 0.62rem; letter-spacing: 0.15em; color: var(--lav-l);
+    border-top: 1.5px solid var(--cream-d);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 640px) {
+    header { padding: 1.25rem 1.5rem; }
+    .cards { flex-direction: column; align-items: center; }
+    .card  { width: 100%; max-width: 340px; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <header>
+    <a class="logo" href="#">
+      ce<span class="baguettes"><span></span><span></span></span>ule&nbsp;<span class="sush">sush</span>
+    </a>
+    <nav><a href="mailto:contact@cellulesush.be">Contact</a></nav>
+  </header>
+
+  <main class="hero">
+    <p class="eyebrow">Bruxelles &nbsp;·&nbsp; Gastronomie asiatique</p>
+    <h1>Deux univers,<br/>une même passion</h1>
+    <p class="sub">Choisissez votre destination</p>
+    <div class="sep"></div>
+
+    <div class="cards">
+
+      <a class="card" href="/restaurant">
+        <div class="card-top">
+          <p class="card-tag">Table &amp; cuisine</p>
+          <div class="card-num">01</div>
+          <h2 class="card-title">Le<br/>Restaurant</h2>
+        </div>
+        <div class="card-bottom">
+          <p class="card-desc">Sushis, rolls &amp; cuisine japonaise.<br/>Une expérience sur place, à Bruxelles.</p>
+          <span class="card-cta">Découvrir <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <a class="card boutique" href="/boutique">
+        <div class="card-top">
+          <p class="card-tag">Épicerie fine</p>
+          <div class="card-num">02</div>
+          <h2 class="card-title">La<br/>Boutique</h2>
+        </div>
+        <div class="card-bottom">
+          <p class="card-desc">Produits asiatiques sélectionnés.<br/>Épicerie fine &amp; livraison à domicile.</p>
+          <span class="card-cta">Explorer <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+    </div>
+
+    <p class="horaires">
+      <span class="dot"></span>
+      Lundi – Samedi &nbsp;·&nbsp; 11:30 – 21:00
+    </p>
+  </main>
+
+  <footer>&copy; 2025 Cellule Sush &nbsp;·&nbsp; Bruxelles</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Menu — Cellule Sush</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#F5F0E0;--cream-d:#EDE7CE;--cream-dd:#E2DAC0;
+  --teal:#1E8A78;--teal-d:#16705F;--teal-dk:#0F4F45;
+  --lavender:#8B9DC3;--lav-l:#B8C4DC;--lav-d:#6A7FA8;
+  --ink:#1a2e2a;--muted:#4a6b63;--off:#faf7ef;
+}
+html,body{background:var(--off);color:var(--ink);font-family:'Nunito Sans',sans-serif;font-weight:300;}
+
+/* Header */
+header{background:var(--teal);padding:1.4rem 3rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.35rem;color:var(--cream);text-decoration:none;display:flex;align-items:center;}
+.baguettes{display:inline-flex;gap:3px;margin:0 1px;align-items:center;}
+.baguettes span{display:block;width:4px;height:15px;background:var(--lavender);border-radius:2px;}
+nav{display:flex;gap:1.5rem;}
+nav a{font-family:'Nunito',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(245,240,224,0.55);text-decoration:none;transition:color .2s;}
+nav a:hover,nav a.active{color:var(--cream);}
+
+/* Hero */
+.hero{background:var(--teal);padding:1.25rem 3rem 3.5rem;text-align:center;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);width:120%;height:80px;background:var(--off);border-radius:50% 50% 0 0;}
+.hero-tag{font-family:'Nunito',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--lav-l);margin-bottom:0.4rem;}
+.hero h1{font-family:'Nunito',sans-serif;font-weight:800;font-size:2.4rem;color:var(--cream);line-height:1.1;}
+.hero-sub{font-size:0.8rem;color:rgba(245,240,224,0.6);margin-top:0.4rem;font-style:italic;}
+.hero-hours{display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.9rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:100px;padding:0.35rem 1rem;font-family:'Nunito',sans-serif;font-size:0.66rem;font-weight:700;letter-spacing:0.12em;color:var(--lav-l);}
+
+/* Tabs */
+.menu-nav{display:flex;overflow-x:auto;scrollbar-width:none;padding:2.25rem 2rem 0;justify-content:center;flex-wrap:wrap;gap:0.45rem;}
+.menu-nav::-webkit-scrollbar{display:none;}
+.tab{font-family:'Nunito',sans-serif;font-size:0.66rem;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;color:var(--muted);background:none;border:1px solid var(--cream-dd);border-radius:100px;padding:0.38rem 1rem;cursor:pointer;transition:all .22s;white-space:nowrap;}
+.tab:hover{border-color:var(--teal);color:var(--teal);}
+.tab.active{background:var(--teal);border-color:var(--teal);color:var(--cream);}
+
+/* Body */
+.menu-body{max-width:920px;margin:0 auto;padding:2rem 1.75rem 5rem;}
+.section{display:none;}
+.section.visible{display:block;}
+
+/* Section title */
+.s-title{display:flex;align-items:baseline;gap:0.75rem;margin-bottom:1.75rem;padding-bottom:0.85rem;border-bottom:2px solid var(--cream-dd);}
+.s-title h2{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.55rem;color:var(--teal);}
+.s-sub{font-size:0.76rem;color:var(--muted);font-style:italic;}
+
+/* Lunch */
+.lunch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:0.9rem;margin-bottom:1.25rem;}
+.lunch-card{background:#fff;border:1px solid var(--cream-dd);border-radius:14px;padding:1.25rem 1.35rem;position:relative;overflow:hidden;}
+.lunch-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal);}
+.lunch-type{font-family:'Nunito',sans-serif;font-size:0.57rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--lavender);margin-bottom:0.35rem;}
+.lunch-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.92rem;color:var(--teal);margin-bottom:0.35rem;line-height:1.2;}
+.lunch-desc{font-size:0.72rem;color:var(--muted);line-height:1.6;}
+.lunch-note{font-size:0.62rem;color:var(--lavender);margin-top:0.35rem;line-height:1.5;}
+
+/* Items */
+.items-header{display:flex;align-items:center;margin:1.6rem 0 0.65rem;}
+.items-header h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.95rem;color:var(--ink);}
+.qty-label{font-family:'Nunito',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-left:auto;display:flex;gap:1.75rem;}
+.qty-label span{min-width:42px;text-align:right;}
+
+.item{display:flex;align-items:flex-start;gap:0.55rem;padding:0.55rem 0;border-bottom:1px dashed var(--cream-dd);}
+.item:last-child{border-bottom:none;}
+.item-dot{width:5px;height:5px;border-radius:50%;background:var(--lavender);flex-shrink:0;margin-top:5px;}
+.item-body{flex:1;}
+.item-name{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.86rem;color:var(--ink);}
+.item-desc{font-size:0.7rem;color:var(--muted);line-height:1.5;display:block;margin-top:1px;}
+.item-prices{display:flex;gap:1.75rem;flex-shrink:0;padding-top:1px;}
+.item-price{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.8rem;color:var(--ink);min-width:42px;text-align:right;}
+.item-price.s{min-width:54px;}
+.veg{display:inline-block;background:rgba(30,138,120,0.1);color:var(--teal);font-size:0.54rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:1px 5px;border-radius:4px;margin-left:4px;vertical-align:middle;}
+
+/* Mois banner */
+.mois{background:var(--teal);border-radius:14px;padding:1.1rem 1.5rem;display:flex;align-items:center;gap:1rem;margin:1.4rem 0;}
+.mois-icon{font-size:2rem;flex-shrink:0;}
+.mois-label{font-family:'Nunito',sans-serif;font-size:0.57rem;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--lav-l);margin-bottom:0.2rem;}
+.mois-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.95rem;color:var(--cream);}
+.mois-desc{font-size:0.7rem;color:rgba(245,240,224,0.65);margin-top:0.1rem;}
+
+/* Bols grid */
+.bols-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0.85rem;margin-top:0.75rem;}
+.bol-card{background:#fff;border:1px solid var(--cream-dd);border-radius:12px;padding:1.1rem 1.25rem;}
+.bol-card.highlight{border-color:var(--teal);border-width:1.5px;}
+.bol-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;color:var(--teal);margin-bottom:0.28rem;}
+.bol-desc{font-size:0.7rem;color:var(--muted);line-height:1.55;margin-bottom:0.65rem;}
+.bol-price{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.95rem;color:var(--ink);}
+
+.base-block{background:var(--cream-d);border-radius:10px;padding:0.9rem 1.1rem;margin:1rem 0 0.75rem;}
+.base-label{font-family:'Nunito',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
+.base-text{font-size:0.73rem;color:var(--ink);line-height:1.6;}
+
+/* Boissons */
+.boissons-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;}
+.bois-group h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.95rem;color:var(--teal);margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1px solid var(--cream-dd);}
+
+/* Extras grid */
+.extras-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;}
+.extra-group h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.95rem;color:var(--teal);margin-bottom:0.65rem;padding-bottom:0.35rem;border-bottom:1px solid var(--cream-dd);}
+
+/* Ramen block */
+.ramen-block{background:var(--teal-dk);border-radius:14px;padding:2rem;text-align:center;margin-top:1.25rem;}
+.ramen-block h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.25rem;color:var(--cream);line-height:1.35;margin-bottom:0.5rem;}
+.ramen-block p{font-size:0.8rem;color:var(--lav-l);line-height:1.75;}
+.ramen-note{font-style:italic;margin-top:0.75rem;font-size:0.72rem;color:rgba(184,196,220,0.65);}
+
+/* Info banner */
+.info-banner{background:var(--cream-d);border-radius:14px;padding:1.25rem 1.5rem;margin-top:1.5rem;display:flex;flex-direction:column;gap:0.75rem;}
+.info-row{display:flex;align-items:flex-start;gap:0.75rem;}
+.info-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:4px;}
+.info-text{font-size:0.75rem;color:var(--ink);line-height:1.6;}
+.info-text a{color:var(--teal);text-decoration:none;font-weight:600;}
+
+/* Allergen */
+.allergen{text-align:center;font-size:0.67rem;color:var(--muted);margin-top:3rem;padding:1rem 1.25rem;background:var(--cream-d);border-radius:12px;line-height:1.75;}
+
+@media(max-width:640px){
+  header{padding:1rem 1.25rem;}
+  .hero{padding:1rem 1.25rem 2.75rem;}
+  .menu-nav{padding:1.75rem 1rem 0;}
+  .menu-body{padding:1.5rem 1rem 4rem;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">ce<span class="baguettes"><span></span><span></span></span>ule&nbsp;sush</a>
+  <nav>
+    <a href="/">Accueil</a>
+    <a href="/restaurant" class="active">Restaurant</a>
+    <a href="/boutique">Boutique</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <p class="hero-tag">Bar à sushis · Louvain-la-Neuve</p>
+  <h1>Notre Carte</h1>
+  <p class="hero-sub">Sushis créatifs, bols généreux &amp; ramens du mois</p>
+  <div class="hero-hours">Lundi – Samedi &nbsp;·&nbsp; 11h30 – 21h00</div>
+</div>
+
+<nav class="menu-nav">
+  <button class="tab active" onclick="show('lunchs',this)">Les Lunchs</button>
+  <button class="tab" onclick="show('makis',this)">Les Makis</button>
+  <button class="tab" onclick="show('californias',this)">Californias</button>
+  <button class="tab" onclick="show('nigiris',this)">Nigiris</button>
+  <button class="tab" onclick="show('bols',this)">Les Bols</button>
+  <button class="tab" onclick="show('extras',this)">Extras</button>
+  <button class="tab" onclick="show('ramen',this)">Le Ramen</button>
+  <button class="tab" onclick="show('boissons',this)">Boissons</button>
+</nav>
+
+<div class="menu-body">
+
+  <!-- LUNCHS -->
+  <div class="section visible" id="lunchs">
+    <div class="s-title"><h2>Les Lunchs</h2><span class="s-sub">Disponibles de 11h30 à 14h30</span></div>
+    <div class="lunch-grid">
+      <div class="lunch-card">
+        <p class="lunch-type">Pour les sushis</p>
+        <p class="lunch-name">Menu Complet</p>
+        <p class="lunch-desc">1 Roll 8 pièces + 4 Nigiris + 1 Extra</p>
+        <p class="lunch-note">Prix du roll et des nigiris + extra GRATUIT*</p>
+      </div>
+      <div class="lunch-card">
+        <p class="lunch-type">Pour les sushis</p>
+        <p class="lunch-name">Menu Gourmand</p>
+        <p class="lunch-desc">2 Rolls 8 pièces + 1 Extra</p>
+        <p class="lunch-note">Prix des rolls + extra GRATUIT*</p>
+      </div>
+      <div class="lunch-card">
+        <p class="lunch-type">Pour le bol</p>
+        <p class="lunch-name">Menu Bol</p>
+        <p class="lunch-desc">1 Bol + 1 Extra</p>
+        <p class="lunch-note">Prix du bol + extra GRATUIT*</p>
+      </div>
+      <div class="lunch-card">
+        <p class="lunch-type">Pour le ramen</p>
+        <p class="lunch-name">Menu Nouillouïouïlle</p>
+        <p class="lunch-desc">1 Ramen + 1 Extra</p>
+        <p class="lunch-note">Prix du ramen + extra GRATUIT*</p>
+      </div>
+    </div>
+    <p style="font-size:0.7rem;color:var(--lavender);text-align:center;">* +0,50€ pour les super-extras</p>
+  </div>
+
+  <!-- MAKIS -->
+  <div class="section" id="makis">
+    <div class="s-title"><h2>Les Makis</h2><span class="s-sub">Recettes maison exclusives</span></div>
+    <div class="items-header">
+      <h3>Makis</h3>
+      <div class="qty-label"><span>4 pcs</span><span>8 pcs</span></div>
+    </div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Salmicondis</span><span class="item-desc">saumon, concombre</span></div><div class="item-prices"><span class="item-price">2,70€</span><span class="item-price">5,00€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Juriste 1</span><span class="item-desc">thon, avocat</span></div><div class="item-prices"><span class="item-price">2,95€</span><span class="item-price">5,40€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Juriste 2</span><span class="item-desc">saumon, avocat</span></div><div class="item-prices"><span class="item-price">2,95€</span><span class="item-price">5,40€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Pean-up</span><span class="item-desc">thon cuit aux 7 épices, concombre, cacahuètes, mayo japonaise</span></div><div class="item-prices"><span class="item-price">3,10€</span><span class="item-price">6,50€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">L'Infoigraphigue</span><span class="item-desc">foie gras, spéculoos, confit de figues</span></div><div class="item-prices"><span class="item-price">4,00€</span><span class="item-price">6,80€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Tartruffe</span><span class="item-desc">thon en tartare, coriandre, échalote, jus de citron, sauce tartufata</span></div><div class="item-prices"><span class="item-price">4,00€</span><span class="item-price">6,80€</span></div></div>
+    <div class="mois">
+      <div class="mois-icon">🌟</div>
+      <div><p class="mois-label">Exclusivité mensuelle</p><p class="mois-title">+ Le Roll du Mois</p><p class="mois-desc">Une création inédite chaque mois — au comptoir ou sur nos réseaux</p></div>
+    </div>
+  </div>
+
+  <!-- CALIFORNIAS -->
+  <div class="section" id="californias">
+    <div class="s-title"><h2>Les Californias</h2><span class="s-sub">Rolls généreux &amp; recettes créatives</span></div>
+    <div class="items-header">
+      <h3>Californias</h3>
+      <div class="qty-label"><span>4 pcs</span><span>8 pcs</span></div>
+    </div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Romantique</span><span class="item-desc">concombre, avocat, mangue, menthe, sésame</span></div><div class="item-prices"><span class="item-price">3,30€</span><span class="item-price">6,00€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Plancton Freak</span><span class="item-desc">scampis tempura, concombre, sésame, masago</span></div><div class="item-prices"><span class="item-price">3,90€</span><span class="item-price">6,80€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">La Crotte de Licorne</span><span class="item-desc">saumon, mangue, coulis de framboise, sésame, zeste de citron</span></div><div class="item-prices"><span class="item-price">3,90€</span><span class="item-price">6,80€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Boul'Ciboule</span><span class="item-desc">saumon, philadelphia, ciboulette</span></div><div class="item-prices"><span class="item-price">3,95€</span><span class="item-price">6,90€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Dark'Ciboule</span><span class="item-desc">saumon cuit, philadelphia, ciboulette, sauce unagi</span></div><div class="item-prices"><span class="item-price">3,90€</span><span class="item-price">6,80€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Samoa</span><span class="item-desc">saumon, mangue, avocat, oignons frits</span></div><div class="item-prices"><span class="item-price">3,95€</span><span class="item-price">6,90€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Good'Chalote</span><span class="item-desc">saumon cuit, avocat, philadelphia, échalote, oignons frits</span></div><div class="item-prices"><span class="item-price">3,90€</span><span class="item-price">6,80€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Chick N'Sush'</span><span class="item-desc">poulet frit, concombre, philadelphia, oignons frits rouges et jeunes, mayo sweet chilli</span></div><div class="item-prices"><span class="item-price">3,90€</span><span class="item-price">6,80€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Pic'Ador</span><span class="item-desc">saumon fumé, avocat, philadelphia sambal olek, oignons frits au paprika</span></div><div class="item-prices"><span class="item-price">3,90€</span><span class="item-price">6,80€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Jason</span><span class="item-desc">saumon fumé, philadelphia à la tartufata, roquette, parmesan, oignons jeunes et rouges, sauce unagi, cacahuètes</span></div><div class="item-prices"><span class="item-price">4,40€</span><span class="item-price">7,80€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Spicy Mango</span><span class="item-desc">scampi tempura, mangue, philadelphia, oignons frits paprika, mayo mango, 7 épices</span></div><div class="item-prices"><span class="item-price">3,90€</span><span class="item-price">6,80€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Le Rasta Rocket</span><span class="item-desc">dans une feuille de riz, saumon, roquette, concombre, sésame, oignons frits</span></div><div class="item-prices"><span class="item-price">3,90€</span><span class="item-price">6,80€</span></div></div>
+    <div class="mois">
+      <div class="mois-icon">🌀</div>
+      <div><p class="mois-label">Exclusivité mensuelle</p><p class="mois-title">+ Le Roll du Mois</p><p class="mois-desc">Une création inédite chaque mois — au comptoir ou sur nos réseaux</p></div>
+    </div>
+  </div>
+
+  <!-- NIGIRIS -->
+  <div class="section" id="nigiris">
+    <div class="s-title"><h2>Les Nigiris</h2><span class="s-sub">Riz vinaigré &amp; garniture fraîche</span></div>
+    <div class="items-header">
+      <h3>Nigiris</h3>
+      <div class="qty-label"><span>1 pc</span><span>4 pcs</span></div>
+    </div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Saumon</span><span class="item-desc">huile de sésame</span></div><div class="item-prices"><span class="item-price">2,20€</span><span class="item-price">7,20€</span></div></div>
+    <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Omelette</span><span class="item-desc">huile de sésame</span></div><div class="item-prices"><span class="item-price">2,20€</span><span class="item-price">7,20€</span></div></div>
+  </div>
+
+  <!-- BOLS -->
+  <div class="section" id="bols">
+    <div class="s-title"><h2>Les Bols</h2><span class="s-sub">Tartares, bols chauds &amp; meltings-pots</span></div>
+
+    <div class="items-header"><h3>Les Tartares</h3></div>
+    <div class="bols-grid">
+      <div class="bol-card">
+        <p class="bol-name">Le Bol d'Euphorie</p>
+        <p class="bol-desc">riz, omelette japonaise, concombre, cacahuètes, sauce unagi</p>
+        <p class="bol-price">6,90€</p>
+      </div>
+      <div class="bol-card">
+        <p class="bol-name">Le Tartare Saumon</p>
+        <p class="bol-desc">riz, saumon, avocat, sésame</p>
+        <p class="bol-price">8,80€</p>
+      </div>
+      <div class="bol-card">
+        <p class="bol-name">Le Tartare Thon</p>
+        <p class="bol-desc">riz, thon, avocat, sésame</p>
+        <p class="bol-price">9,70€</p>
+      </div>
+      <div class="bol-card">
+        <p class="bol-name">Le Mi-Mi</p>
+        <p class="bol-desc">riz, thon, saumon, mangue, avocat, ciboulette et oignons frits, sauce maison</p>
+        <p class="bol-price">11,20€</p>
+      </div>
+      <div class="bol-card">
+        <p class="bol-name">Le Thaï 33</p>
+        <p class="bol-desc">riz, bœuf au curry rouge, lait de coco, poivrons, coriandre, oignons jeunes, cacahuètes</p>
+        <p class="bol-price">8,80€</p>
+      </div>
+    </div>
+
+    <div class="mois" style="margin-top:1.5rem;">
+      <div class="mois-icon">🍚</div>
+      <div><p class="mois-label">Exclusivité mensuelle</p><p class="mois-title">+ Le Bol du Mois</p><p class="mois-desc">Une création spéciale chaque mois — au comptoir</p></div>
+    </div>
+
+    <div class="items-header" style="margin-top:2rem;"><h3>Le Bol Chaud</h3></div>
+    <div class="bols-grid">
+      <div class="bol-card highlight">
+        <p class="bol-name">Le Don CurryLeon</p>
+        <p class="bol-desc">nouilles udon ou riz vinaigré, curry japonais, poulet frit ou tofu frit, œuf mollet, edamame, germes de soja, oignons jeunes et frits, sauce unagi</p>
+        <p class="bol-price">14,20€</p>
+      </div>
+    </div>
+
+    <div class="items-header" style="margin-top:2rem;"><h3>Les Meltings-Pots</h3></div>
+    <div class="base-block">
+      <p class="base-label">Base</p>
+      <p class="base-text"><strong>Riz · Avocat · Concombre · 7 épices · Edamame</strong></p>
+      <p class="base-text" style="margin-top:0.25rem;"><strong>Toppings :</strong> oignons jeunes et frits · sésame · germes de radis</p>
+    </div>
+    <div class="bols-grid">
+      <div class="bol-card"><p class="bol-name">Le Saumon Cuit</p><p class="bol-desc">base + carottes, sauce unagi, mayo sriracha, mayo japonaise</p><p class="bol-price">12,90€</p></div>
+      <div class="bol-card"><p class="bol-name">Le Tofu Frit <span class="veg">veg</span></p><p class="bol-desc">base + carottes, sauce unagi, mayo sriracha, mayo japonaise</p><p class="bol-price">12,90€</p></div>
+      <div class="bol-card"><p class="bol-name">Le Scampi Tempura</p><p class="bol-desc">base + mangue, mayo mango</p><p class="bol-price">13,50€</p></div>
+      <div class="bol-card"><p class="bol-name">Le Poulet Katsu</p><p class="bol-desc">base + tomates cerises, sauce unagi, mayo sweet chilli</p><p class="bol-price">13,50€</p></div>
+      <div class="bol-card"><p class="bol-name">Le Saumon Mariné</p><p class="bol-desc">base + carottes, sauce unagi, mayo sriracha, mayo japonaise</p><p class="bol-price">13,50€</p></div>
+      <div class="bol-card"><p class="bol-name">Le Met 10 ans</p><p class="bol-desc">base + trio de saumon (mariné, fumé, cuit), roquette, mayo tartufata, sauce unagi, zestes de citron et oignons jeunes et rouges</p><p class="bol-price">16,00€</p></div>
+      <div class="bol-card"><p class="bol-name">L'Omelette Japonaise <span class="veg">veg</span></p><p class="bol-desc">base + carottes, sauce unagi, mayo sriracha, mayo japonaise</p><p class="bol-price">12,90€</p></div>
+      <div class="bol-card"><p class="bol-name">Le Karaage</p><p class="bol-desc">base + mangue, mayo mango</p><p class="bol-price">13,50€</p></div>
+    </div>
+  </div>
+
+  <!-- EXTRAS -->
+  <div class="section" id="extras">
+    <div class="s-title"><h2>Les Extras</h2><span class="s-sub">Pour compléter votre repas</span></div>
+    <div class="extras-grid">
+      <div class="extra-group">
+        <h3>Les Extras</h3>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Riz vinaigré (sésame)</span></div><span class="item-price s">2,70€</span></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Salade chou / carotte (sauce sésame)</span></div><span class="item-price s">2,70€</span></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Soupe miso (tofu, ciboulette)</span></div><span class="item-price s">3,00€</span></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Gyozas frits froids (légumes, sauce maison) 3 pcs</span></div><span class="item-price s">3,60€</span></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Dim Sum (crevettes, sauce aigre-douce) 3 pcs</span></div><span class="item-price s">3,60€</span></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Salade d'algues</span></div><span class="item-price s">3,60€</span></div>
+        <div class="mois" style="margin-top:1rem;">
+          <div class="mois-icon">✨</div>
+          <div><p class="mois-label">Mensuel</p><p class="mois-title">+ L'Extra du Mois</p><p class="mois-desc">Une surprise chaque mois au comptoir</p></div>
+        </div>
+      </div>
+      <div class="extra-group">
+        <h3>Les Super-Extras</h3>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Karaage chaud (mayo sweet chilli) 4 pcs</span></div><span class="item-price s">4,40€</span></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Scampis tempura chaud (mayo mango) 3 pcs</span></div><span class="item-price s">4,40€</span></div>
+        <p style="font-size:0.68rem;color:var(--lavender);margin-top:0.75rem;">* +0,50€ lors d'un menu lunch</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RAMEN -->
+  <div class="section" id="ramen">
+    <div class="s-title"><h2>Le Ramen</h2><span class="s-sub">Un grand bol de bonheur chaud</span></div>
+    <div class="ramen-block">
+      <h3>Un grand bol, avec des nouilles bien chaudes<br/>et un bouillon plein de saveurs !</h3>
+      <p>Tous les mois, une délicieuse création proposée !<br/>Retrouvez-la au comptoir ou sur les réseaux sociaux.</p>
+      <p class="ramen-note">La recette change chaque mois — suivez-nous pour ne rien manquer.</p>
+    </div>
+    <div class="info-banner" style="margin-top:1.5rem;">
+      <div class="info-row">
+        <div class="info-dot"></div>
+        <p class="info-text">Vous travaillez dans les zonings de Louvain-la-Neuve et de Wavre ? Commandez sur <a href="https://cellulesush-lelabo.be" target="_blank">cellulesush-lelabo.be</a> — on vous livre à votre bureau !</p>
+      </div>
+      <div class="info-row">
+        <div class="info-dot"></div>
+        <p class="info-text">Retrouvez également nos spécialités au AD Delhaize de Chastre et à celui de Genappe.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOISSONS -->
+  <div class="section" id="boissons">
+    <div class="s-title"><h2>Les Boissons</h2><span class="s-sub">Softs, vins &amp; bières</span></div>
+    <div class="boissons-grid">
+      <div class="bois-group">
+        <h3>Softs</h3>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Spa plate ou pétillante (50cl)</span></div><span class="item-price s">2,50€</span></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Pepsi, Pepsi Max, Fanta, Ice Tea, Limonade Oxfam</span></div><span class="item-price s">2,50€</span></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Drink a Flower (différents goûts)</span></div><span class="item-price s">2,90€</span></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Arizona (différents goûts)</span></div><span class="item-price s">3,50€</span></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Lemonaid (différents goûts)</span></div><span class="item-price s">3,50€</span></div>
+      </div>
+      <div class="bois-group">
+        <h3>Vins &amp; Bières</h3>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Quart de vin rouge / rosé / blanc</span></div><span class="item-price s">5,50€</span></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Asahi</span></div><span class="item-price s">3,80€</span></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Kirin</span></div><span class="item-price s">3,80€</span></div>
+        <div class="item"><div class="item-dot"></div><div class="item-body"><span class="item-name">Iki</span></div><span class="item-price s">4,20€</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="allergen">
+    La carte des allergènes est disponible sur demande au comptoir.<br/>
+    Tous nos plats sont fraîchement préparés dans notre cuisine où nous manipulons une grande variété d'ingrédients.<br/>
+    Malgré toutes nos précautions, nous ne pouvons éliminer tout risque de contamination croisée dans nos produits, et garantir l'absence totale d'allergènes.
+  </p>
+
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('visible');
+  btn.classList.add('active');
+  window.scrollTo({top: document.querySelector('.menu-nav').offsetTop - 16, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>

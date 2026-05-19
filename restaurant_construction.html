@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Le Restaurant — Cellule Sush</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,600;0,700;0,800;1,300&family=Nunito+Sans:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream:   #F5F0E0; --cream-d: #EDE7CE;
+    --teal:    #1E8A78; --teal-d:  #16705F; --teal-bg: #0F4F45;
+    --lavender:#8B9DC3; --lav-l:   #B8C4DC;
+    --ink:     #1a2e2a; --muted:   #4a6b63;
+  }
+  html, body { height: 100%; background: var(--teal-bg); color: var(--cream);
+    font-family: 'Nunito Sans', sans-serif; font-weight: 300; }
+  .shell { min-height: 100vh; display: flex; flex-direction: column; }
+
+  header {
+    padding: 1.75rem 3rem; display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(245,240,224,0.1);
+  }
+  .logo { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.35rem;
+    color: var(--cream); text-decoration: none; display: flex; align-items: center; }
+  .baguettes { display: inline-flex; gap: 3px; margin: 0 1px; align-items: center; }
+  .baguettes span { display: block; width: 4px; height: 15px; background: var(--lavender); border-radius: 2px; }
+
+  .back { font-family: 'Nunito', sans-serif; font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,240,224,0.45);
+    text-decoration: none; transition: color 0.25s; }
+  .back:hover { color: var(--cream); }
+
+  /* ── Hero ── */
+  .hero { flex: 1; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; padding: 5rem 2rem; text-align: center; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    font-family: 'Nunito', sans-serif; font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--teal);
+    background: rgba(30,138,120,0.18); border: 1px solid rgba(30,138,120,0.35);
+    padding: 0.45rem 1.2rem; border-radius: 100px; margin-bottom: 2.5rem;
+    animation: fadeUp 0.7s ease both;
+  }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal);
+    animation: pulse 2s ease-in-out infinite; }
+
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  h1 { font-family: 'Nunito', sans-serif; font-weight: 800;
+    font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.0; color: var(--cream);
+    margin-bottom: 0.5rem; animation: fadeUp 0.7s 0.1s ease both; }
+  h1 span { color: var(--teal); }
+
+  .sub-title { font-family: 'Nunito', sans-serif; font-style: italic; font-weight: 300;
+    font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--lav-l);
+    margin-bottom: 2.5rem; animation: fadeUp 0.7s 0.2s ease both; }
+
+  .sep { width: 44px; height: 3px; background: var(--lavender); border-radius: 2px;
+    margin: 0 auto 2.5rem; animation: fadeUp 0.7s 0.25s ease both; }
+
+  .message { max-width: 400px; font-size: 0.8rem; color: var(--lav-l); line-height: 1.9;
+    letter-spacing: 0.04em; margin-bottom: 3rem;
+    animation: fadeUp 0.7s 0.32s ease both; }
+
+  /* Notify */
+  .notify { display: flex; max-width: 360px; width: 100%;
+    animation: fadeUp 0.7s 0.42s ease both; border-radius: 12px; overflow: hidden; }
+  .notify input { flex: 1; background: rgba(245,240,224,0.08); border: 1.5px solid rgba(245,240,224,0.15);
+    border-right: none; border-radius: 12px 0 0 12px; color: var(--cream);
+    font-family: 'Nunito Sans', sans-serif; font-size: 0.75rem; letter-spacing: 0.05em;
+    padding: 0.85rem 1.1rem; outline: none; transition: border-color 0.3s; }
+  .notify input::placeholder { color: rgba(245,240,224,0.35); }
+  .notify input:focus { border-color: rgba(30,138,120,0.6); }
+  .notify button { background: var(--teal); border: 1.5px solid var(--teal);
+    border-radius: 0 12px 12px 0; color: var(--cream);
+    font-family: 'Nunito', sans-serif; font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 0.85rem 1.2rem; cursor: pointer; transition: background 0.3s; white-space: nowrap; }
+  .notify button:hover { background: var(--teal-d); }
+
+  /* Details */
+  .details { display: flex; gap: 3.5rem; margin-top: 4rem; flex-wrap: wrap;
+    justify-content: center; animation: fadeUp 0.7s 0.52s ease both; }
+  .detail-label { font-family: 'Nunito', sans-serif; font-size: 0.58rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase; color: rgba(139,157,195,0.7);
+    margin-bottom: 0.4rem; }
+  .detail-value { font-family: 'Nunito', sans-serif; font-weight: 600; font-size: 0.95rem;
+    color: var(--lav-l); letter-spacing: 0.05em; }
+
+  footer { padding: 1.25rem 3rem; text-align: center;
+    font-size: 0.62rem; letter-spacing: 0.15em; color: rgba(245,240,224,0.2);
+    border-top: 1px solid rgba(245,240,224,0.06); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (max-width: 640px) {
+    header { padding: 1.25rem 1.5rem; }
+    .notify { flex-direction: column; border-radius: 12px; }
+    .notify input { border-right: 1.5px solid rgba(245,240,224,0.15); border-bottom: none; border-radius: 12px 12px 0 0; }
+    .notify button { border-radius: 0 0 12px 12px; }
+    .details { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <a class="logo" href="/">ce<span class="baguettes"><span></span><span></span></span>ule&nbsp;sush</a>
+    <a class="back" href="/">← Retour</a>
+  </header>
+
+  <main class="hero">
+    <div class="badge"><span class="badge-dot"></span>En préparation</div>
+    <h1>Le <span>Restaurant</span></h1>
+    <p class="sub-title">Sushis &amp; cuisine japonaise</p>
+    <div class="sep"></div>
+    <p class="message">
+      Notre restaurant est en cours de construction.<br/>
+      Nous préparons une expérience culinaire soignée,<br/>
+      entre tradition japonaise et finesse contemporaine.
+    </p>
+    <form class="notify" onsubmit="handleSubmit(event)">
+      <input type="email" placeholder="Votre adresse e-mail" required/>
+      <button type="submit">Me prévenir</button>
+    </form>
+    <div class="details">
+      <div><p class="detail-label">Ouverture</p><p class="detail-value">Bientôt</p></div>
+      <div><p class="detail-label">Horaires</p><p class="detail-value">Lun – Sam · 11:30–21:00</p></div>
+      <div><p class="detail-label">Lieu</p><p class="detail-value">Bruxelles</p></div>
+    </div>
+  </main>
+
+  <footer>&copy; 2025 Cellule Sush &nbsp;·&nbsp; Tous droits réservés</footer>
+</div>
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Noté ✓';
+    btn.style.background = '#16705F';
+    e.target.querySelector('input').disabled = true;
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
