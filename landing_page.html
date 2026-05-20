@@ -130,11 +130,69 @@
   }
   .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); opacity: 0.5; }
 
+  .construction-banner {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 1.75rem; padding: 0.85rem 1.5rem;
+    background: rgba(30,138,120,0.08);
+    border: 1px solid rgba(30,138,120,0.2);
+    border-radius: 100px;
+    animation: fadeUp 0.7s 0.6s ease both;
+  }
+  .construction-icon { font-size: 1rem; flex-shrink: 0; }
+  .construction-text { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+  .construction-link {
+    font-family: 'Nunito', sans-serif; font-weight: 700;
+    color: var(--teal); text-decoration: none;
+    border-bottom: 1px solid rgba(30,138,120,0.3);
+    transition: border-color .2s;
+  }
+  .construction-link:hover { border-color: var(--teal); }
+
   footer {
     padding: 1.2rem 3rem; text-align: center;
     font-size: 0.62rem; letter-spacing: 0.15em; color: var(--lav-l);
     border-top: 1.5px solid var(--cream-d);
   }
+
+  .wip-block {
+    background: var(--teal-dk, #0F4F45);
+    border-radius: 20px;
+    padding: 2.5rem 3rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    animation: fadeUp 0.7s 0.1s ease both;
+    width: 100%;
+    max-width: 560px;
+  }
+  .wip-tag {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--lav-l, #B8C4DC);
+    margin-bottom: 0.75rem;
+  }
+  .wip-block h1 {
+    font-family: 'Nunito', sans-serif; font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--cream, #F5F0E0);
+    line-height: 1.1; margin-bottom: 0.75rem;
+  }
+  .wip-sub {
+    font-size: 0.82rem; color: rgba(245,240,224,0.6);
+    margin-bottom: 1.25rem; line-height: 1.6;
+  }
+  .wip-btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: var(--teal, #1E8A78);
+    border-radius: 100px;
+    padding: 0.75rem 1.75rem;
+    font-family: 'Nunito', sans-serif; font-weight: 700;
+    font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--cream, #F5F0E0);
+    text-decoration: none;
+    transition: background .25s;
+  }
+  .wip-btn:hover { background: var(--teal-d, #16705F); }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(14px); }
@@ -159,8 +217,16 @@
   </header>
 
   <main class="hero">
-    <p class="eyebrow">Bruxelles &nbsp;·&nbsp; Gastronomie asiatique</p>
-    <h1>Deux univers,<br/>une même passion</h1>
+    <p class="eyebrow">Louvain-la-Neuve &nbsp;·&nbsp; Gastronomie asiatique</p>
+
+    <div class="wip-block">
+      <p class="wip-tag">🚧 Site en cours de construction</p>
+      <h1>Nous arrivons<br/>bientôt !</h1>
+      <p class="wip-sub">En attendant, retrouvez notre carte complète sur</p>
+      <a class="wip-btn" href="/Le menu">Le Menu →</a>
+    </div>
+
+    <div class="sep" style="margin-top:2.5rem;"></div>
     <p class="sub">Choisissez votre destination</p>
     <div class="sep"></div>
 
@@ -173,7 +239,7 @@
           <h2 class="card-title">Le<br/>Restaurant</h2>
         </div>
         <div class="card-bottom">
-          <p class="card-desc">Sushis, rolls &amp; cuisine japonaise.<br/>Une expérience sur place, à Bruxelles.</p>
+          <p class="card-desc">Sushis, rolls &amp; cuisine japonaise.<br/>Rue des Wallons 8, Louvain-la-Neuve.</p>
           <span class="card-cta">Découvrir <span class="arrow">→</span></span>
         </div>
       </a>
@@ -185,7 +251,7 @@
           <h2 class="card-title">La<br/>Boutique</h2>
         </div>
         <div class="card-bottom">
-          <p class="card-desc">Produits asiatiques sélectionnés.<br/>Épicerie fine &amp; livraison à domicile.</p>
+          <p class="card-desc">Produits asiatiques sélectionnés.<br/>Épicerie fine, en face du restaurant.</p>
           <span class="card-cta">Explorer <span class="arrow">→</span></span>
         </div>
       </a>
@@ -196,9 +262,10 @@
       <span class="dot"></span>
       Lundi – Samedi &nbsp;·&nbsp; 11:30 – 21:00
     </p>
+
   </main>
 
-  <footer>&copy; 2025 Cellule Sush &nbsp;·&nbsp; Bruxelles</footer>
+  <footer>&copy; 2025 Cellule Sush &nbsp;·&nbsp; Louvain-la-Neuve</footer>
 </div>
 </body>
 </html>
