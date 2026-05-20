@@ -147,19 +147,22 @@
 
   <div class="content">
     <div class="left">
-      <div class="badge"><span class="badge-line"></span>En cours de création</div>
-      <h1>La<br/>Boutique</h1>
+      <div class="badge"><span class="badge-line"></span>Site en construction</div>
+      <h1>Le Sushi<br/>Du Détail</h1>
       <p class="sub-title">Épicerie fine asiatique</p>
       <div class="sep"></div>
       <p class="message">
-        Notre boutique en ligne arrive bientôt.<br/>
-        Produits sélectionnés, épicerie fine,<br/>
-        livraison à domicile sur Bruxelles.
+        Notre site est en cours de construction,<br/>
+        mais la boutique n'a pas bougé !<br/>
+        Retrouvez-nous toujours au même endroit.
       </p>
-      <form class="notify" onsubmit="handleSubmit(event)">
-        <input type="email" placeholder="Votre e-mail" required/>
-        <button type="submit">Me notifier</button>
-      </form>
+      <div style="display:inline-flex;align-items:center;gap:0.75rem;background:rgba(30,138,120,0.08);border:1px solid rgba(30,138,120,0.2);border-radius:14px;padding:1rem 1.5rem;margin-bottom:1rem;">
+        <span style="font-size:1.4rem;">📍</span>
+        <div style="text-align:left;">
+          <p style="font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;color:var(--teal);margin-bottom:0.1rem;">Rue des Wallons 8</p>
+          <p style="font-size:0.72rem;color:var(--muted);">1348 Louvain-la-Neuve · En face du restaurant</p>
+        </div>
+      </div>
       <div class="tags">
         <span class="tag">Épicerie</span>
         <span class="tag">Sauces</span>
@@ -174,23 +177,14 @@
         <div class="deco-circle">
           <div class="deco-inner"><span>🛒</span></div>
         </div>
-        <p class="deco-label">Bientôt disponible</p>
+        <p class="deco-label">Le Sushi Du Détail</p>
       </div>
-      <p class="corner">Boutique asiatique</p>
+      <p class="corner">Épicerie fine asiatique</p>
     </div>
   </div>
 
-  <footer>&copy; 2025 Cellule Sush &nbsp;·&nbsp; Bruxelles</footer>
+  <footer>&copy; 2025 Le Sushi Du Détail &nbsp;·&nbsp; Louvain-la-Neuve</footer>
 </div>
-<script>
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button');
-    btn.textContent = 'Enregistré ✓';
-    btn.style.background = '#16705F';
-    e.target.querySelector('input').disabled = true;
-    btn.disabled = true;
-  }
-</script>
+
 </body>
 </html>
