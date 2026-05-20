@@ -117,37 +117,30 @@
   </header>
 
   <main class="hero">
-    <div class="badge"><span class="badge-dot"></span>En préparation</div>
+    <div class="badge"><span class="badge-dot"></span>Site en construction</div>
     <h1>Le <span>Restaurant</span></h1>
     <p class="sub-title">Sushis &amp; cuisine japonaise</p>
     <div class="sep"></div>
     <p class="message">
-      Notre restaurant est en cours de construction.<br/>
-      Nous préparons une expérience culinaire soignée,<br/>
-      entre tradition japonaise et finesse contemporaine.
+      Notre site est en cours de construction,<br/>
+      mais le restaurant n'a pas bougé !<br/>
+      Nous vous accueillons toujours au même endroit.
     </p>
-    <form class="notify" onsubmit="handleSubmit(event)">
-      <input type="email" placeholder="Votre adresse e-mail" required/>
-      <button type="submit">Me prévenir</button>
-    </form>
+    <div style="display:inline-flex;align-items:center;gap:0.75rem;background:rgba(245,240,224,0.08);border:1px solid rgba(245,240,224,0.18);border-radius:14px;padding:1rem 1.5rem;margin-bottom:1rem;animation:fadeUp 0.7s 0.42s ease both;">
+      <span style="font-size:1.4rem;">📍</span>
+      <div style="text-align:left;">
+        <p style="font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;color:var(--cream);margin-bottom:0.1rem;">Rue des Wallons 8</p>
+        <p style="font-size:0.72rem;color:var(--lav-l);">1348 Louvain-la-Neuve · Galerie Saint-Hubert</p>
+      </div>
+    </div>
     <div class="details">
-      <div><p class="detail-label">Ouverture</p><p class="detail-value">Bientôt</p></div>
       <div><p class="detail-label">Horaires</p><p class="detail-value">Lun – Sam · 11:30–21:00</p></div>
-      <div><p class="detail-label">Lieu</p><p class="detail-value">Bruxelles</p></div>
+      <div><p class="detail-label">Lieu</p><p class="detail-value">Louvain-la-Neuve</p></div>
     </div>
   </main>
 
-  <footer>&copy; 2025 Cellule Sush &nbsp;·&nbsp; Tous droits réservés</footer>
+  <footer>&copy; 2025 Cellule Sush &nbsp;·&nbsp; Louvain-la-Neuve</footer>
 </div>
-<script>
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button');
-    btn.textContent = 'Noté ✓';
-    btn.style.background = '#16705F';
-    e.target.querySelector('input').disabled = true;
-    btn.disabled = true;
-  }
-</script>
+
 </body>
 </html>
